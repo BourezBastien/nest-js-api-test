@@ -1,17 +1,13 @@
-import { Controller, Param } from '@nestjs/common';
-import {
-  Get,
-  Post,
-  Delete,
-  Put
-} from '@nestjs/common/decorators/http/request-mapping.decorator';
+import { Controller, Param, Get, Post, Delete, Put } from '@nestjs/common';
 import { Body } from '@nestjs/common/decorators/http/route-params.decorator';
+import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { FeedPost } from '../models/post.interface';
 import { FeedService } from '../services/feed.service';
 
 @Controller('feed')
+@ApiTags('Feed')
 export class FeedController {
   constructor(private feedService: FeedService) {}
 

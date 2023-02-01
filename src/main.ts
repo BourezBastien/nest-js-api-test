@@ -7,13 +7,14 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
-    .setTitle('NestJS Feed example')
-    .setDescription('Feed API description')
+    .setTitle('NestJS Exemple')
+    .setDescription('Test Api for nestJS.')
     .setVersion('1.0')
     .addTag('Feed')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
   await app.listen(3000);
 }
 bootstrap();

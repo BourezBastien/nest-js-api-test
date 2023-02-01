@@ -20,9 +20,8 @@ export class FeedService {
     return from(this.feedPostRepository.find());
   }
 
-
   async findById(id: number): Promise<FeedPost> {
-    return await this.feedPostRepository.findOne({where: { id }});
+    return await this.feedPostRepository.findOne({ where: { id } });
   }
 
   updatePost(id: number, feedPost: FeedPost): Observable<UpdateResult> {
