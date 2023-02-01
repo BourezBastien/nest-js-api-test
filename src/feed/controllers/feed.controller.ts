@@ -25,6 +25,11 @@ export class FeedController {
     return this.feedService.findAllPosts();
   }
 
+  @Get(':id')
+  findById(@Param('id') id: number): Promise<FeedPost> {
+    return this.feedService.findById(id);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: number,
