@@ -7,7 +7,7 @@ export class UserEntity {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column('numeric')
+    @Column('numeric', { unique: true })
     clientId: number;
 
     @Column()

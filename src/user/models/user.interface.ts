@@ -1,4 +1,4 @@
-export interface Client {
+export interface User {
   uuid: string;
   clientId: number;
   clientFirstName: string;

@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
+import { AccountEntity } from 'src/account/models/account.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
-import { Client } from '../models/user.interface';
+import { User } from '../models/user.interface';
 import { UserService } from '../services/user.service';
 
 @Controller('user')
@@ -12,7 +13,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  create(@Body() user: Client): Observable<UserEntity> {
+  create(@Body() user: User): Observable<UserEntity> {
     return this.userService.createUser(user);
   }
   @Get()
@@ -25,10 +26,15 @@ export class UserController {
     return this.userService.findById(id);
   }
 
+  @Get(':id/accounts')
+  findAccountByClientId(@Param('id') id: number): Promise<AccountEntity[]> {
+    return this.userService.findAccountByClientId(id);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body() client: Client,
+    @Body() client: User,
   ): Observable<UpdateResult> {
     return this.userService.updateUser(id, client);
   }
