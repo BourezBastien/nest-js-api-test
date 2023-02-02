@@ -3,9 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FeedModule } from './feed/feed.module';
 import { UserModule } from './user/user.module';
 import { AccountModule } from './account/account.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -20,9 +20,9 @@ import { AccountModule } from './account/account.module';
       autoLoadEntities: true,
       synchronize: true
     }),
-    FeedModule,
     UserModule,
     AccountModule,
+    TransactionsModule,
   ], 
   controllers: [AppController],
   providers: [AppService],

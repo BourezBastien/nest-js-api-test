@@ -20,8 +20,8 @@ export class AccountService {
     return from(this.accountRepository.find());
   }
 
-  async findAccountByIsId(id: string): Promise<AccountEntity> {
-    return await this.accountRepository.findOne({where: {id}});
+  async findAccountByIsId(uuid: string): Promise<AccountEntity> {
+    return await this.accountRepository.findOne({where: {uuid}});
   }
   async findAccountByClientId(id: number): Promise<AccountEntity[]> {
     return await this.accountRepository.find({where: {clientId: id }})

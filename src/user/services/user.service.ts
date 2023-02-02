@@ -23,8 +23,8 @@ export class UserService {
     return from(this.userRepository.find());
   }
 
-  async findById(id: string): Promise<UserEntity> {
-    return await this.userRepository.findOne({ where: { id } });
+  async findById(uuid: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { uuid } });
   }
 
   updateUser(id: string, client: User): Observable<UpdateResult> {
