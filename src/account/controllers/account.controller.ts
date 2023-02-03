@@ -6,8 +6,8 @@ import { AccountEntity } from '../models/account.entity';
 import { Account } from '../models/account.interface';
 import { AccountService } from '../services/account.service';
 
-@Controller('accounts')
-@ApiTags('Account')
+@Controller('bank_accounts')
+@ApiTags('Bank Account')
 export class AccountController {
   constructor(private accountService: AccountService) {}
 
@@ -24,30 +24,30 @@ export class AccountController {
     return this.accountService.findAllAccount();
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Find bank account by is id' })
-  findByIsId(@Param('id') id: string): Promise<AccountEntity>{
-    return this.accountService.findAccountByIsId(id);
+  @Get(':uuid')
+  @ApiOperation({ summary: 'Find bank account by is uuid' })
+  findByIsId(@Param('uuid') uuid: string): Promise<AccountEntity>{
+    return this.accountService.findAccountByIsId(uuid);
   } 
 
   @Get('/client/:id')
-  @ApiOperation({ summary: 'Find bank account of user by is id' })
+  @ApiOperation({ summary: 'Find bank account using client id' })
   findByClientId(@Param('id') id: number): Promise<AccountEntity[]>{
     return this.accountService.findAccountByClientId(id);
   } 
 
-  @Put(':id')
-  @ApiOperation({ summary: 'Update bank account by is id' })
+  @Put(':uuid')
+  @ApiOperation({ summary: 'Update bank account by is uuid' })
   update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() account: Account,
   ): Observable<UpdateResult> {
-    return this.accountService.updateUser(id, account);
+    return this.accountService.updateAccount(uuid, account);
   }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Delete bank acount by is id' })
-  delete(@Param('id') id: string): Observable<DeleteResult> {
-    return this.accountService.deleteUser(id);
+  @Delete(':uuid')
+  @ApiOperation({ summary: 'Delete bank acount by is uuid' })
+  delete(@Param('uuid') uuid: string): Observable<DeleteResult> {
+    return this.accountService.deleteAccount(uuid);
   }
 }

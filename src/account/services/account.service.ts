@@ -27,12 +27,12 @@ export class AccountService {
     return await this.accountRepository.find({where: {clientId: id }})
   }
   
-  updateUser(id: string, account: Account): Observable<UpdateResult> {
-    return from(this.accountRepository.update(id, account));
+  updateAccount(uuid: string, account: Account): Observable<UpdateResult> {
+    return from(this.accountRepository.update(uuid, account));
   }
 
-  deleteUser(id: string): Observable<DeleteResult> {
-    return from(this.accountRepository.delete(id));
+  deleteAccount(uuid: string): Observable<DeleteResult> {
+    return from(this.accountRepository.delete(uuid));
   }
 
 }

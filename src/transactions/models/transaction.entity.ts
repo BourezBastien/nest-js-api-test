@@ -28,11 +28,7 @@ export class TransactionsEntity {
 
 
   @Column()
-  @ApiProperty({
-    required: true,
-    description: 'The is type of transaction (DEBIT, CREDIT, TRANSFERT)',
-    
-  })
+  @ApiHideProperty()
   TransactionType: string;
 
   @Column('numeric')
@@ -44,10 +40,7 @@ export class TransactionsEntity {
 
 
   @Column()
-  @ApiProperty({
-    required: true,
-    description: 'The is transaction status (IDLE, ACCEPTED, REFUSED, CANCELED)',
-  })
+  @ApiHideProperty()
   TransactionStatus: string;
 
 
