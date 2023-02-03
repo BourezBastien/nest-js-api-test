@@ -35,6 +35,13 @@ export class TransactionsEntity {
   })
   TransactionType: string;
 
+  @Column('numeric')
+  @ApiProperty({
+    required: true,
+    description: 'The is account transaction amount',
+  })
+  transactionAmount: number;
+
 
   @Column()
   @ApiProperty({

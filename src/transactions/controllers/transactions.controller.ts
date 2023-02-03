@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { TransactionsEntity } from '../models/transaction.entity';
@@ -13,14 +13,16 @@ export class TransactionsController {
   @Post()
   @ApiOperation({ summary: 'Create new transactions' })
   @ApiBody({ type: TransactionsEntity })
-  create(@Body() transaction: Transactions): Observable<TransactionsEntity> {
-    return this.transactionService.createTransaction(transaction);
+  create(@Body() transaction: Transactions) {
+    return this.transactionService.createTransaction(
+      transaction,
+      transaction.accountNumber,
+    );
+  }
+
+  @Get()
+  @ApiOperation({ summary: 'Find all transactions' })
+  findAll(): Observable<TransactionsEntity[]> {
+    return this.transactionService.findAllTransaction();
   }
 }
-function Serialize() {
-  throw new Error('Function not implemented.');
-}
-function ApiModelProperty() {
-  throw new Error('Function not implemented.');
-}
-
