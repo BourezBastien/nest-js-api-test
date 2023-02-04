@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
-import { UpdateResult } from 'typeorm';
 import { TransactionsEntity } from '../models/transaction.entity';
 import { Transactions } from '../models/transactions.interface';
 import { TransactionsService } from '../services/transactions.service';
@@ -10,6 +9,9 @@ import { TransactionsService } from '../services/transactions.service';
 @ApiTags('Transactions')
 export class TransactionsController {
   constructor(private transactionService: TransactionsService) {}
+
+  // TODO: add transfert
+  // TODO: add bank account and transaction info inside get user request
 
   @Post('/debit')
   @ApiOperation({ summary: 'Create new debit transaction' })
@@ -22,6 +24,13 @@ export class TransactionsController {
   @ApiBody({ type: TransactionsEntity })
   createCredit(@Body() transaction: Transactions) {
     return this.transactionService.createCreditTransaction(transaction);
+  }
+  
+  @Post('/transfert/:number')
+  @ApiOperation({ summary: 'Transfert money to other user using is account number' })
+  @ApiBody({ type: TransactionsEntity })
+  transfert(@Body() transaction: Transactions, @Param('number') bank_account_number: number) {
+    return this.transactionService.createTransfertTransaction(transaction, bank_account_number);
   }
 
   @Get()
