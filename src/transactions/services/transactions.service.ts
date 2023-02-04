@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, from } from 'rxjs';
 import { AccountEntity } from 'src/account/models/account.entity';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { TransactionsEntity } from '../models/transaction.entity';
 import { Transactions } from '../models/transactions.interface';
 
@@ -41,6 +41,32 @@ export class TransactionsService {
     return 'Error: Type are only ACCEPTED, REFUSED, IDLE, CANCELED';
   }
 
+  async findByAccountNumber(
+    accountNumber: number,
+  ): Promise<TransactionsEntity[]> {
+    return await this.transactionsRepository.find({ where: { accountNumber } });
+  }
+
+  async AcceptById(transaction_uuid: string) {
+    const transaction = await this.transactionsRepository.findOne({
+      where: { uuid: transaction_uuid },
+    });
+    return transaction.TransactionStatus === "IDLE" ? from(this.transactionsRepository.update(transaction_uuid, {TransactionStatus: 'ACCEPTED'})) : "Error: please privide and uuid of transaction type idle.";
+  }
+
+  async refusalById(transaction_uuid: string) {
+    const transaction = await this.transactionsRepository.findOne({
+      where: { uuid: transaction_uuid },
+    });
+    return transaction.TransactionStatus === "IDLE" ? from(this.transactionsRepository.update(transaction_uuid, {TransactionStatus: 'REFUSED'})) : "Error: please privide and uuid of transaction type idle.";
+  }
+
+  async cancelById(transaction_uuid: string) {
+    const transaction = await this.transactionsRepository.findOne({
+      where: { uuid: transaction_uuid },
+    });
+    return transaction.TransactionStatus === "IDLE" ? from(this.transactionsRepository.update(transaction_uuid, {TransactionStatus: 'CANCELED'})) : "Error: please privide and uuid of transaction type idle.";
+  }
   async createTransaction(
     transaction: Transactions,
     Type: String,
