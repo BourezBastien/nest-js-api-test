@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { TransactionsEntity } from '../models/transaction.entity';
 import { Transactions } from '../models/transactions.interface';
@@ -13,10 +13,15 @@ export class TransactionsController {
   @Post('/debit')
   @ApiOperation({ summary: 'Create new debit transaction' })
   @ApiBody({ type: TransactionsEntity })
-  create(@Body() transaction: Transactions) {
+  createDebit(@Body() transaction: Transactions) {
     return this.transactionService.createDebitTransaction(transaction);
   }
-
+  @Post('/credit')
+  @ApiOperation({ summary: 'Create new credit transaction' })
+  @ApiBody({ type: TransactionsEntity })
+  createCredit(@Body() transaction: Transactions) {
+    return this.transactionService.createCreditTransaction(transaction);
+  }
 
   // TODO: add find transaction by type and status. 
 
@@ -31,5 +36,11 @@ export class TransactionsController {
   @ApiOperation({ summary: 'Find transaction by is uuid' })
   findByIsId(@Param('uuid') uuid: string): Promise<TransactionsEntity> {
     return this.transactionService.findTransactionByIsId(uuid);
+  }
+
+  @Get('/status/:status')
+  @ApiOperation({ summary: 'Find transactions by status'})
+  findByStatus(@Param('status') status: string) {
+    return this.transactionService.findByStatus(status);
   }
 }
