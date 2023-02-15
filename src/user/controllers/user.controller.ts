@@ -13,8 +13,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
-import { AccountEntity } from 'src/account/models/account.entity';
-import { DeleteResult, UpdateResult } from 'typeorm';
+import { AccountEntity } from '../../account/models/account.entity';
 import { UserEntity } from '../models/user.entity';
 import { User } from '../models/user.interface';
 import { UserService } from '../services/user.service';
@@ -27,12 +26,12 @@ export class UserController {
   @Post()
   @ApiBody({type: UserEntity})
   @ApiOperation({ summary: 'Create new user' })
-  create(@Body() user: User): Observable<UserEntity> {
+  create(@Body() user: User) {
     return this.userService.createUser(user);
   }
   @Get()
   @ApiOperation({ summary: 'Find all users' })
-  findAll(): Observable<UserEntity[]> {
+  findAllUser(): Observable<UserEntity[]> {
     return this.userService.findAllUser();
   }
 
@@ -45,7 +44,7 @@ export class UserController {
   @Get(':id/accounts')
   @ApiOperation({ summary: 'Find user bank account by is id' })
   findAccountByClientId(@Param('id') id: number): Promise<AccountEntity[]> {
-    return this.userService.findAccountByClientId(id);
+    return this.userService.findUsertByClientId(id);
   }
 
   @Put(':id')
@@ -53,13 +52,13 @@ export class UserController {
   update(
     @Param('id') id: string,
     @Body() client: User,
-  ): Observable<UpdateResult> {
+  ) {
     return this.userService.updateUser(id, client);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Delete user by is id' })
-  delete(@Param('id') id: string): Observable<DeleteResult> {
+  delete(@Param('id') id: string) {
     return this.userService.deleteUser(id);
   }
 }
