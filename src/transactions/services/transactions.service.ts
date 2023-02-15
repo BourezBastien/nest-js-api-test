@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Observable, from } from 'rxjs';
-import { AccountEntity } from 'src/account/models/account.entity';
+import { AccountEntity } from '../../account/models/account.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { TransactionsEntity } from '../models/transaction.entity';
 import { Transactions } from '../models/transactions.interface';
