@@ -82,7 +82,7 @@ describe('UserService', () => {
   });
 
 
-  it("should find user's ", async () => {
+  it("should find user by is client id", async () => {
     // Now you can control the return value of your mock's methods
     repositoryMock.find.mockReturnValue(user);
     expect(await service.findUsertByClientId(user.clientId)).toEqual(user); 

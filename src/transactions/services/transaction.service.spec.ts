@@ -70,4 +70,24 @@ describe('TransactionsService', () => {
     expect(service.createTransfertTransaction(transaction, 66525762701));
   });
 
+  it('should find all transactions', async () => {
+    repositoryMock.find.mockReturnValue(transaction);
+    expect(service.findAllTransaction());
+  });
+
+  it('should find transactions by account number', async () => {
+    repositoryMock.find.mockReturnValue(transaction);
+    expect(service.findByAccountNumber(66525762701));
+  });
+
+  it('should find transactions by is id', async () => {
+    repositoryMock.find.mockReturnValue(transaction);
+    expect(service.findTransactionByIsId("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+  });
+
+  it('should find transaction by status', async () => {
+    repositoryMock.find.mockReturnValue(transaction);
+    expect(service.findByStatus("IDLE"));
+  });
+
 });
