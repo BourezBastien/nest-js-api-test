@@ -77,12 +77,12 @@ describe('TransactionsService', () => {
 
   it('should find transactions by account number', async () => {
     repositoryMock.find.mockReturnValue(transaction);
-    expect(service.findByAccountNumber(66525762701));
+    expect(service.findByAccountNumber(transaction.accountNumber));
   });
 
   it('should find transactions by is id', async () => {
     repositoryMock.find.mockReturnValue(transaction);
-    expect(service.findTransactionByIsId("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+    expect(service.findTransactionByIsId(transaction.uuid));
   });
 
   it('should find transaction by status', async () => {
@@ -92,17 +92,17 @@ describe('TransactionsService', () => {
 
   it('should cancel transaction by is id', async () => {
     repositoryMock.update.mockReturnValue(transaction);
-    expect(service.cancelById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+    expect(service.cancelById(transaction.uuid));
   });
 
   it('should accept transaction by is id', async () => {
     repositoryMock.update.mockReturnValue(transaction);
-    expect(service.AcceptById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+    expect(service.AcceptById(transaction.uuid));
   });
 
   it('should not accept transaction by is id', async () => {
     repositoryMock.update.mockReturnValue(transaction);
-    expect(service.refusalById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+    expect(service.refusalById(transaction.uuid));
   });
   
 
