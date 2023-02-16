@@ -94,6 +94,16 @@ describe('TransactionsService', () => {
     repositoryMock.update.mockReturnValue(transaction);
     expect(service.cancelById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
   });
+
+  it('should accept transaction by is id', async () => {
+    repositoryMock.update.mockReturnValue(transaction);
+    expect(service.AcceptById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+  });
+
+  it('should not accept transaction by is id', async () => {
+    repositoryMock.update.mockReturnValue(transaction);
+    expect(service.refusalById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+  });
   
 
 });
