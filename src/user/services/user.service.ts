@@ -19,8 +19,8 @@ export class UserService {
     return this.userRepository.save(client);
   }
 
-  findAllUser(): Observable<UserEntity[]> {
-    return from(this.userRepository.find());
+  findAllUser(): Promise<UserEntity[]> {
+    return this.userRepository.find();
   }
 
   async findById(uuid: string): Promise<UserEntity | undefined> {

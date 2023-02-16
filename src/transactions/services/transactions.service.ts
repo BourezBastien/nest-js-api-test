@@ -35,8 +35,8 @@ export class TransactionsService {
     );
   }
 
-  findAllTransaction(): Observable<TransactionsEntity[]> {
-    return from(this.transactionsRepository.find());
+  findAllTransaction(): Promise<TransactionsEntity[]> {
+    return this.transactionsRepository.find();
   }
 
   async findTransactionByIsId(uuid: string): Promise<TransactionsEntity> {

@@ -35,7 +35,7 @@ export class TransactionsController {
 
   @Get()
   @ApiOperation({ summary: 'Find all transactions' })
-  findAll(): Observable<TransactionsEntity[]> {
+  findAll(): Promise<TransactionsEntity[]> {
     return this.transactionService.findAllTransaction();
   }
 

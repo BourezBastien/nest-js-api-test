@@ -31,7 +31,7 @@ export class UserController {
   }
   @Get()
   @ApiOperation({ summary: 'Find all users' })
-  findAllUser(): Observable<UserEntity[]> {
+  findAllUser(): Promise<UserEntity[]> {
     return this.userService.findAllUser();
   }
 

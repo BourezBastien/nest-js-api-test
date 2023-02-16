@@ -50,6 +50,12 @@ describe('UserService', () => {
     expect(service.createUser(user)).toEqual(user);
   });
 
+  it('should find all users', async () => {
+    // Now you can control the return value of your mock's methods
+    repositoryMock.find.mockReturnValue(user);
+    expect(await service.findAllUser());
+  });
+
   it('should find a user by is uuid', async () => {
     // Now you can control the return value of your mock's methods
     repositoryMock.findOne.mockReturnValue(user);

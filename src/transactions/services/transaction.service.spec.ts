@@ -72,7 +72,7 @@ describe('TransactionsService', () => {
 
   it('should find all transactions', async () => {
     repositoryMock.find.mockReturnValue(transaction);
-    expect(service.findAllTransaction());
+    expect(await service.findAllTransaction());
   });
 
   it('should find transactions by account number', async () => {
@@ -89,5 +89,11 @@ describe('TransactionsService', () => {
     repositoryMock.find.mockReturnValue(transaction);
     expect(service.findByStatus("IDLE"));
   });
+
+  it('should cancel transaction by is id', async () => {
+    repositoryMock.update.mockReturnValue(transaction);
+    expect(service.cancelById("dc06eb5d-f8a9-4826-bca9-914845239ae1"));
+  });
+  
 
 });
