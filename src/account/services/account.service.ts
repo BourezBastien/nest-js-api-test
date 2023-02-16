@@ -12,12 +12,12 @@ export class AccountService {
     private readonly accountRepository: Repository<AccountEntity>,
   ) {}
 
-  createAccount(account: Account): Observable<AccountEntity> {
-    return from(this.accountRepository.save(account));
+  createAccount(account: Account): Promise<AccountEntity> {
+    return this.accountRepository.save(account);
   }
 
-  findAllAccount(): Observable<AccountEntity[]> {
-    return from(this.accountRepository.find());
+  findAllAccount(): Promise<AccountEntity[]> {
+    return this.accountRepository.find();
   }
 
   async findAccountByIsId(uuid: string): Promise<AccountEntity> {

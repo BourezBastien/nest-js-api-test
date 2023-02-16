@@ -14,13 +14,13 @@ export class AccountController {
   @Post()
   @ApiBody({type: AccountEntity})
   @ApiOperation({ summary: 'Create new bank account type for user' })
-  create(@Body() account: Account): Observable<AccountEntity> {
+  create(@Body() account: Account): Promise<AccountEntity> {
     return this.accountService.createAccount(account);
   }
 
   @Get()
   @ApiOperation({ summary: 'Find all bank accounts' })
-  findAll(): Observable<AccountEntity[]> {
+  findAll(): Promise<AccountEntity[]> {
     return this.accountService.findAllAccount();
   }
 
