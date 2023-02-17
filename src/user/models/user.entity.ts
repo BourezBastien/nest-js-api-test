@@ -15,6 +15,11 @@ export class UserEntity {
     @Length(11,11)
     clientId: number;
 
+    @ApiProperty({ description: 'The is client password' })
+    @Column('numeric')
+    @Length(6,6)
+    password: number;
+
     @ApiProperty({ description: 'The is fist name of client' })
     @Column()
     clientFirstName: string;

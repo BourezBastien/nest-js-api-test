@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AccountModule } from './account/account.module';
 import { AppModule } from './app.module';
+import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { UserModule } from './user/user.module';
 
@@ -17,7 +18,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config, {
-    include: [TransactionsModule, AccountModule, UserModule]
+    include: [TransactionsModule, AccountModule, UserModule, AuthModule]
   });
   SwaggerModule.setup('api', app, document);
 

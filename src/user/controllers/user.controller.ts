@@ -12,8 +12,6 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { Observable } from 'rxjs';
-import { AccountEntity } from '../../account/models/account.entity';
 import { UserEntity } from '../models/user.entity';
 import { User } from '../models/user.interface';
 import { UserService } from '../services/user.service';
@@ -43,7 +41,7 @@ export class UserController {
 
   @Get(':id/accounts')
   @ApiOperation({ summary: 'Find user bank account by is id' })
-  findAccountByClientId(@Param('id') id: number): Promise<AccountEntity[]> {
+  findAccountByClientId(@Param('id') id: number): Promise<UserEntity> {
     return this.userService.findUsertByClientId(id);
   }
 

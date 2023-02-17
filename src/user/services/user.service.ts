@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable } from 'rxjs';
 import { AccountEntity } from '../../account/models/account.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import {  Repository, } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
 import { User } from '../models/user.interface';
 
@@ -11,8 +10,6 @@ export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    @InjectRepository(UserEntity)
-    private readonly accountRepository: Repository<AccountEntity>,
   ) {}
 
   createUser(client: User) {
@@ -27,6 +24,7 @@ export class UserService {
     return await this.userRepository.findOne({ where: { uuid } });
   }
 
+
   updateUser(id: string, client: User) {
     console.log(`UPDATE: User with id ${id} has been updated`);
     return this.userRepository.update(id, client);
@@ -37,8 +35,8 @@ export class UserService {
     return this.userRepository.delete(id);
   }
 
-  async findUsertByClientId(id: number): Promise<AccountEntity[]> {
-    return await this.accountRepository.find({ where: { clientId: id } });
+  async findUsertByClientId(id: number): Promise<UserEntity> {
+    return await this.userRepository.findOne({ where: { clientId:id } });
   }
   
 }
